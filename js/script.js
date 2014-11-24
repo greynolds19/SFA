@@ -117,20 +117,20 @@ function onEachFeature(feature, layer) {
     layer.on({
         mouseover: highlightFeature,
         mouseout: resetHighlight,
-        click: zoomToFeature
+        //click: zoomToFeature
         //could also do...
         //click: function () {
     });
 }
 
 //schools data is our js file. use it to create a geojson layer
-geojson = L.geoJson(schoolsdata, {
+geojson = L.geoJson(schoolsData, {
     //might need to use pointToLayer here since it's point data...
     //pointToLayer: function (feature, latlng) {
     //    return L.circleMarker(latlng, geojsonMarkerOptions);
     style: style, 
-    }
     onEachFeature: onEachFeature
+    
     //created onEachFeature earlier. It does popup window
 }).addTo(map);
 
