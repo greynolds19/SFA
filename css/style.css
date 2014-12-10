@@ -30,8 +30,8 @@ body,html {
 }
 
 #sideBar {
-	height: 55%;
-	width: 200px;
+	height: 40%;
+	width: 250px;
 	background: rgba(15, 51, 56, 0.59);
 	position: absolute;
 	bottom: 0;
@@ -49,7 +49,13 @@ body,html {
 
 .title {
 	font-size: 24px;
-	margin-bottom: 19px;
+	margin-bottom: 35px;
+}
+
+
+.legend{
+	font-size: 12px;
+	margin-bottom: 15px;
 }
 .field {
 	background:#46B3FE;
