@@ -6,8 +6,30 @@ var map = L.map('map')
 
 //sadd basemap tiles from mapbox
 L.tileLayer('http://{s}.tile.stamen.com/toner-lite/{z}/{x}/{y}.png', {
-    maxZoom: 18
+    maxZoom: 13,
+    minZoom: 5,
+    maxBounds: [[20.671336, -135.439453],[49.964473, -65.522461]],
+    //maxBounds doesn't work yet
+    attribution: 'US Census'
 }).addTo(map);
+
+//move zoomControl to top right to make room for Title Box
+// L.control.zoom (
+//   position: "topright";
+//   );
+
+ //L.Control.Zoom({ position: 'topright' }).addTo(map);
+
+//'about' POPUP Listeners
+$('#about').on('click',function(){
+  $('#mask').fadeIn(250);
+  $('.popup').fadeIn(250);
+});
+
+$('.close').on('click',function(){
+  $(this).parent().fadeOut(250);
+  $('#mask').fadeOut(250);
+});
 
  
 //Start_Date color
@@ -33,7 +55,7 @@ function binaryColor(d) {
 function getWeight(d) {
     return d == '0' ? .5 :
            d == '1' ? 3 :
-                      5 ;
+                    20 ;
 }
 
 
@@ -52,7 +74,7 @@ function getWeight(d) {
                     fillOpacity: 1
                 });
 
-                //triangle
+                //using dvf to style points as triangles -- doesn't work
                 // var marker = L.RegularPolygonMarker(latlng, {
                 //     numberOfSides: 3,
                 //     rotation: 60.0,
@@ -66,6 +88,7 @@ function getWeight(d) {
 
                        
                 marker.bindPopup( '<font size = "2">' + "District : " + feature.properties.district + '</font>' + 
+                                  '<br><b>' + feature.properties.LCITY + '</b>' + 
                                   '<br>' + 
                                   '<b><br />' + "Start Date : " + feature.properties.Start_Date + '</b>' + 
                                   '<b><br />' + "Cluster Recruitment : " + feature.properties.cluster_recruitment + '</b>' +
@@ -79,6 +102,9 @@ function getWeight(d) {
         marker.on('mouseout', function (e) {
             this.closePopup();
         });
+        // marker.on('click', function (e) {
+        //     map.fitBounds(e.target.getBounds());
+        // });
                 return marker; 
             }   
 
@@ -115,7 +141,51 @@ L.geoJson(tractData, {style: styleChoro}).addTo(map);
 console.log(tractData);
 
 
+//MARKER LEGEND
+var yearLegend = L.control({position: 'bottomright'});
 
+yearLegend.onAdd = function (map) {
+
+    var div = L.DomUtil.create('div', 'info yearLegend'),
+        grades = [2010, "2011+", 2011, "2012+", 2012, 2013],
+        labels = [];
+
+    // loop through our density intervals and generate a label with a colored CIRCLE for each interval
+    div.innerHTML = '<div class="legendVar">' + "Start Year" + "</div>";
+    for (var i = 0; i < grades.length; i++) {
+        div.innerHTML +=
+            '<i style="background:' + yearColor(grades[i]) + '"></i> ' +
+            grades[i] + "<br>";
+    }
+
+    return div;
+};
+
+yearLegend.addTo(map);
+
+
+
+//CHOROPLETH LEGEND
+var choroLegend = L.control({position: 'bottomright'});
+
+choroLegend.onAdd = function (map) {
+
+    var div = L.DomUtil.create('div', 'info choroLegend'),
+        grades = [0, 2, 4, 6],
+        labels = [];
+
+    // loop through our density intervals and generate a label with a colored square for each interval
+    div.innerHTML = '<div class="legendVar">' + "Poverty Rate" + "</div>";
+    for (var i = 0; i < grades.length; i++) {
+        div.innerHTML +=
+            '<i style="background:' + choroColor(grades[i] + 1) + '"></i> ' +
+            grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+    }
+
+    return div;
+};
+
+choroLegend.addTo(map);
 
 
 
