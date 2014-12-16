@@ -1,4 +1,4 @@
-SFA
+Schools +
 ===
 
-for SFA map project
+Created to visualize Schools Plus schools in context with poverty in surrounding areas

@@ -2,28 +2,33 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>SFA map test</title>
+  <title>Schools +</title>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
 
 </head>
 <body>
-	<div id="sideBar">
-   <div class="title">Success for All</div>
-   <div class="legend">Legend coming soon!</div>
-   <div class="field year">Start Year</div>
-   <div class="field recruitment">Cluster Recruitment</div>
+	<div id="topBar">
+   <div class="title">Schools Plus</div>
+   <div id='about'>About</div>
+      <div id='mask'></div>
+      <div class = "popup privacy">
+      <div class = "close">&#10006;</div>
+       <h2>About the Schools Plus Map</h2>
+    
+       <p>Schools are represented by circular markers. A bold outline symbolizes a lottery school.Zoom in and explore characterisics of schools in different cities by using the zoom keys in the upper-right corner, or by holding shift and dragging a box over an area.</p>
+
+       <p>Rental vacancy rate is the vacancy rate among rental units, from the 2010 American Community Survey.</p>
+
+  </div>
   </div>
   <div id="map"></div> 
   <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
   <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-  <script src="data/SFACTbuffers1simple.js"></script>
-  <script src="dvfmarker/copyright.js"></script>
-  <script src="dvfmarker/linearfunctions.js"></script>
-  <script src="dvfmarker/utils.js"></script>
-  <script src="dvfmarker/palettes.js"></script>
-  <script src="dvfmarker/markers.js"></script>
-  <script src="dvfmarker/chartmarkers.js"></script>
+  <script src="data/SFACTbuffer3simple.js"></script>
   <script src="js/script.js"></script>  
 </body>
 </html>
+
+
+
